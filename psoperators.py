@@ -592,9 +592,10 @@ class PSOperators:
     def psIf(self):
         block = self.opPop()
         boolen = self.opPop()
+        index = len(self.dictstack) - 1
         if isinstance(boolen, bool) and isinstance(block, CodeArrayValue):
             if boolen:
-                block.apply(self)
+                block.apply(self, index)
         else:
             print("psIf")
             raise ValueError 
@@ -607,12 +608,14 @@ class PSOperators:
         else_block= self.opPop()
         if_block = self.opPop()
         boolen = self.opPop()
+        index = len(self.dictstack) - 1
+        
 
         if isinstance(boolen, bool) and isinstance(else_block, CodeArrayValue) and isinstance(if_block, CodeArrayValue):
             if boolen:
-                if_block.apply(self)
+                if_block.apply(self, index)
             else:
-                else_block.apply(self)
+                else_block.apply(self, index)
         else:
             print("psIfElse")
             raise ValueError
@@ -638,7 +641,7 @@ class PSOperators:
             current_index = begin_index
             while(True):
                 self.opPush(current_index)
-                index = self.staticLink("for", len(self.dictstack)-1)
+                index = len(self.dictstack) - 1
                 code_array.apply(self, index)
                 current_index += increment
                 if(current_index == end_index):

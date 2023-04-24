@@ -93,9 +93,9 @@ if __name__ == '__main__':
     ps_env_s = PSOperators("static")  
     ps_env_d = PSOperators("dynamic")  
     testnum = 1
-    # for testcase in tests:
-    if True:
-        testcase= testinput5
+    for testcase in tests:
+    # if True:
+        # testcase= testinput5
         try:
             print("\n-- TEST {} --".format(testnum))
             expr_list = read(testcase)
