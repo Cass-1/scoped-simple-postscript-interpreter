@@ -1,5 +1,5 @@
 # Isaac Dahle
-# Colaborators: Vishal
+# Colaborators: Vishal, Daniel Lee
 
 
 from typing import Dict

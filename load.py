@@ -78,14 +78,61 @@ testinput8 = """
     """
 
 testinput9 = """
-    /x 4 def
-    /g { x stack } def
-    /f { /x 7 def g } def
-    f
+    /x 400 def
+    /s 400 def
+    /z 400 def
+    /y { s stack } def
+    /gramd { /s 12 def y } def
+    gramd
+    /z gramd 2 mul def
+    z
 """
 
+# Type error is intentional. It shows that this works for static but not dyanic
+testinput10 = """
+        /g {(Firstaaaaaaaaaaaaaaaaaaa)} def
+        /fn (Isaac) def
+        /l (Last) def
+        /ln (Dahle) def
+        /x 4 def
+        /g { x stack } def
+        /f { /x 7 def g } def
+        f
+        g
+        g
+        dup
+        7   
+        fn
+        putinterval
+        dup
+        13
+        l
+        putinterval
+        dup
+        19
+        ln
+        putinterval
+        /x 5 def
 
-tests = [testinput1,testinput2,testinput3,testinput4,testinput5,testinput6,testinput7,testinput8]
+    """ 
+
+testinput11 = """
+            /goo {dup dup (Hello) eq stack {0 (Agasp) putinterval} if} def
+            (Hello)
+            goo 
+    """ 
+testinput12 = """
+           
+   /goo {dup dup (Hello) eq {0 (Agasp) putinterval} if} def
+            /sam 12 def
+            /z { sam  } def
+            /f { /sam 1 def z } def
+            f
+            (Hello)
+            stack
+    """ 
+
+tests = [testinput1,testinput2,testinput3,testinput4,testinput5,testinput6,testinput7,testinput8,testinput9, testinput10, testinput11, testinput12]
 
 # program start
 if __name__ == '__main__':
